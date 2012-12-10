@@ -24,5 +24,9 @@ public interface DCommentDao extends GeneratedDCommentDao {
      * @return a datastore ket
      */
     public Key createKey(Long id);
+    
+	public CursorPage<DComment, java.lang.Long> queryPageByProductIdSortedByCreatedDate(java.lang.String productId,
+		     																			 int pageSize, 
+		     																			 Serializable cursorString);
 
 }

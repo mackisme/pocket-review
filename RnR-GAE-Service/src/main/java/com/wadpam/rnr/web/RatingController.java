@@ -62,16 +62,23 @@ public class RatingController extends AbstractRestController {
                                   @PathVariable String domain,
                                   UriComponentsBuilder uriBuilder,
                                   @RequestParam(required=true) String productId,
+                                  @RequestParam(required=false) String productName,
                                   @RequestParam(required=false) String username,
                                   @RequestParam(required=false) Float latitude,
                                   @RequestParam(required=false) Float longitude,
+                                  @RequestParam(required=false) Boolean returnSummary,
                                   @RequestParam int rating,
                                   @RequestParam(required=false) String comment) {
 
         final DRating body = rnrService.addRating(domain, productId, username, latitude, longitude, rating, comment);
 
-        return new RedirectView(uriBuilder.path("/{domain}/rating/{id}").
-                buildAndExpand(domain, body.getId()).toUriString());
+        if(returnSummary == null || returnSummary == false){
+	        return new RedirectView(uriBuilder.path("/{domain}/rating/{id}").
+	                buildAndExpand(domain, body.getId()).toUriString());
+        }else{
+        	return new RedirectView(uriBuilder.path("/{domain}/product/{id}").
+	                buildAndExpand(domain, body.getProductId()).toUriString());
+        }
     }
 
     /**

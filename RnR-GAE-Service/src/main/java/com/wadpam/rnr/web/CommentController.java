@@ -68,6 +68,7 @@ public class CommentController extends AbstractRestController {
                                    UriComponentsBuilder uriBuilder,
                                    @PathVariable String domain,
                                    @RequestParam(required=true) String productId,
+                                   @RequestParam(required=false) String productName,
                                    @RequestParam(required=false) String username,
                                    @RequestParam(required=false) Float latitude,
                                    @RequestParam(required=false) Float longitude,

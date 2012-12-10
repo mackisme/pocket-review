@@ -3,6 +3,7 @@ package com.wadpam.rnr.dao;
 import com.google.appengine.api.datastore.*;
 import com.wadpam.rnr.domain.DComment;
 import net.sf.mardao.core.CursorPage;
+import net.sf.mardao.core.Filter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,6 +27,17 @@ public class DCommentDaoBean
     public Key createKey(Long id) {
         return createKey(id);
     }
+    
+	public CursorPage<DComment, java.lang.Long> queryPageByProductIdSortedByCreatedDate(java.lang.String productId,
+            																		     int pageSize, 
+            																		     Serializable cursorString) {
+            
+		final Filter filter = createEqualsFilter(COLUMN_NAME_PRODUCTID, productId);
+		
+		return queryPage(false, pageSize, null, null, COLUMN_NAME_CREATEDDATE, false, null, false, cursorString, filter);
+//              queryPage(false, pageSize, null, null, null, false, null, false, cursorString, filter);
+        
+    }    
 
 
 }

@@ -644,7 +644,10 @@ public class RnrService {
     // Get all comments for a product
     public CursorPage<DComment, Long> getAllCommentsForProduct(String productId, int limit, Serializable cursor) {
         LOG.debug("Get all comments for product:{}", productId);
-        return commentDao.queryPageByProductId(productId, limit, cursor);
+        
+//        return commentDao.queryPageByProductId(productId, limit, cursor);
+        
+        return commentDao.queryPageByProductIdSortedByCreatedDate(productId, limit, cursor);
     }
 
     // Get all products a user have liked
